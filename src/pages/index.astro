@@ -1,0 +1,136 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Problem from '../components/Problem.astro';
+import Architecture from '../components/Architecture.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Features from '../components/Features.astro';
+import UseCases from '../components/UseCases.astro';
+import Differentiator from '../components/Differentiator.astro';
+import Pricing from '../components/Pricing.astro';
+import FAQ from '../components/FAQ.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'DAGx by Hypeakz.io – Orchestrierungs-Layer für OpenClaw';
+const description = 'DAGx ist die Steuerungsschicht über OpenClaw: DAG Workflows, DNA Snapshots (.toon), Score/Fitness, Experiments, Routing und Energy Policies für reproduzierbare AI-Ausführung.';
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://hypeakz.io/#organization",
+          "name": "Hypeakz.io",
+          "url": "https://hypeakz.io",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "contact@hypeakz.io",
+            "contactType": "sales"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://hypeakz.io/dagx/#software",
+          "name": "DAGx",
+          "description": "Orchestrierungs-Layer für OpenClaw: DAG Workflows, DNA Snapshots (.toon), Score/Fitness, Experiments, Routing und Energy Policies für reproduzierbare AI-Ausführung.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "url": "https://hypeakz.io/dagx",
+          "author": {
+            "@id": "https://hypeakz.io/#organization"
+          },
+          "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/PreOrder",
+            "price": "0",
+            "priceCurrency": "EUR",
+            "description": "Early Access"
+          },
+          "featureList": [
+            "DAG Layer mit Dependencies und Graph View",
+            "DNA Compiler (.toon) mit Snapshots und Run-Pinning",
+            "Score/Fitness Loop mit J-Funktion",
+            "Compare Engine (Base vs Candidate)",
+            "Energy Controller mit Limits und Enforcement",
+            "Skill Registry mit Routing Advisor",
+            "Experiments Runner (Sandbox)",
+            "Multi-Project Isolation mit Scoped Storage"
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Ist DAGx ein Ersatz für OpenClaw?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Nein. DAGx ist die Steuerungsschicht über OpenClaw. OpenClaw bleibt die Execution Engine — DAGx orchestriert, versioniert und optimiert die Runs darüber."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Was bringt der DAG Layer konkret?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Explizite Dependencies zwischen Tasks, reproduzierbare Runs und deterministische Execution Order."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Was ist DNA (.toon)?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Eine versionierte Konfiguration von Agents, Skills und Policies, pinbar pro Run für vollständige Reproduzierbarkeit."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Kann ich mehrere Projekte isoliert betreiben?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ja. Project-scoped Storage, getrennte Fitness-Werte und unabhängige Policies."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Wie wird Qualität gemessen?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Score + Fitness + Verify/Patch + DoD Checks. Jeder Run wird quantitativ bewertet."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Kann ich das in meine Agenturprozesse integrieren?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ja. Deliveries, Approvals, Routing und Teams sind nativ integriert."
+              }
+            }
+          ]
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Header />
+  <main>
+    <Hero />
+    <Problem />
+    <Architecture />
+    <HowItWorks />
+    <Features />
+    <UseCases />
+    <Differentiator />
+    <Pricing />
+    <FAQ />
+    <FinalCTA />
+  </main>
+  <Footer />
+</Layout>

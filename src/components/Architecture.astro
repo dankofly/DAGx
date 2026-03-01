@@ -1,0 +1,71 @@
+---
+import Card from './Card.astro';
+import Badge from './Badge.astro';
+
+const openclawFeatures = ['Execution', 'Sessions', 'Tools', 'Runtime'];
+const dagxFeatures = ['DAG Nodes', 'DNA Snapshots (.toon)', 'Score/Fitness', 'Experiments', 'Routing', 'Delivery'];
+---
+
+<section id="architektur" class="py-20 md:py-28">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="animate-fade-in-up mx-auto max-w-3xl text-center">
+      <Badge text="Architektur" variant="accent" />
+      <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-100 md:text-3xl">
+        OpenClaw + DAGx: getrennte Verantwortlichkeiten
+      </h2>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      <Card>
+        <div class="mb-4 flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-800">
+            <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-100">OpenClaw</h3>
+        </div>
+        <p class="mb-4 text-sm text-slate-400">Execution Engine — führt Agent-Tasks aus</p>
+        <ul class="space-y-2">
+          {openclawFeatures.map((feature) => (
+            <li class="flex items-center gap-2 text-sm text-slate-300">
+              <span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+              {feature}
+            </li>
+          ))}
+        </ul>
+      </Card>
+
+      <Card>
+        <div class="mb-4 flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500/10">
+            <svg class="h-5 w-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-100">DAGx</h3>
+        </div>
+        <p class="mb-4 text-sm text-slate-400">Control Layer — steuert, versioniert, optimiert</p>
+        <ul class="space-y-2">
+          {dagxFeatures.map((feature) => (
+            <li class="flex items-center gap-2 text-sm text-slate-300">
+              <span class="h-1.5 w-1.5 rounded-full bg-indigo-400"></span>
+              {feature}
+            </li>
+          ))}
+        </ul>
+      </Card>
+    </div>
+
+    <div class="mt-8 rounded-xl border border-slate-700/40 bg-slate-900/50 px-6 py-4">
+      <p class="text-center text-sm text-slate-400 md:text-base">
+        <span class="text-slate-300">DAG Nodes</span> →
+        <span class="text-slate-300">Runs</span> →
+        <span class="text-slate-300">Scores</span> →
+        <span class="text-slate-300">Fitness</span> →
+        <span class="text-slate-300">Resolver</span> →
+        <span class="text-indigo-400">Mutations (human approved)</span>
+      </p>
+    </div>
+  </div>
+</section>

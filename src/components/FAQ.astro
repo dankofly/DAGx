@@ -1,0 +1,65 @@
+---
+import Badge from './Badge.astro';
+
+const faqs = [
+  {
+    question: 'Ist DAGx ein Ersatz für OpenClaw?',
+    answer: 'Nein. DAGx ist die Steuerungsschicht über OpenClaw. OpenClaw bleibt die Execution Engine — DAGx orchestriert, versioniert und optimiert die Runs darüber.',
+  },
+  {
+    question: 'Was bringt der DAG Layer konkret?',
+    answer: 'Explizite Dependencies zwischen Tasks, reproduzierbare Runs und deterministische Execution Order. Jeder Task kennt seine Vorbedingungen und kann isoliert verifiziert werden.',
+  },
+  {
+    question: 'Was ist DNA (.toon)?',
+    answer: 'Eine versionierte Konfiguration von Agents, Skills und Policies. Jeder Snapshot ist pinbar pro Run — du kannst exakt die Konfiguration wiederherstellen, die ein bestimmtes Ergebnis produziert hat.',
+  },
+  {
+    question: 'Kann ich mehrere Projekte isoliert betreiben?',
+    answer: 'Ja. Project-scoped Storage, getrennte Fitness-Werte und unabhängige Policies stellen sicher, dass kein Projekt ein anderes beeinflusst.',
+  },
+  {
+    question: 'Wie wird Qualität gemessen?',
+    answer: 'Über die J-Funktion (Score), Fitness-Aggregation über Zeitreihen, automatische Verify/Patch-Loops und Definition-of-Done Checks. Jeder Run wird quantitativ bewertet.',
+  },
+  {
+    question: 'Kann ich das in meine Agenturprozesse integrieren?',
+    answer: 'Ja. DAGx unterstützt Deliveries mit Quality Gates, Approval Workflows, Routing nach Skill-Fitness und Team-basierte Zugriffssteuerung.',
+  },
+  {
+    question: 'Wie funktioniert die Kostenkontrolle?',
+    answer: 'Der Energy Controller setzt Budget-Limits pro Projekt, Team und Agent durch. Die J-Funktion berücksichtigt Token-Kosten direkt im Score: J = 100 − (0.0001 × Tokens) − (0.5 × Minuten) − (10 × Fail-Rate).',
+  },
+  {
+    question: 'Was ist der Unterschied zu anderen AI-Tools?',
+    answer: 'DAGx ist kein Chat-Frontend. Es ist ein Governance-Layer mit versionierten Runs, messbarer Qualität, Experiments und Audit-Trail. Der Fokus liegt auf Reproduzierbarkeit und Kontrolle, nicht auf Prompting.',
+  },
+];
+---
+
+<section id="faq" class="py-20 md:py-28">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="animate-fade-in-up mx-auto max-w-3xl text-center">
+      <Badge text="FAQ" variant="accent" />
+      <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-100 md:text-3xl">
+        Häufig gestellte Fragen
+      </h2>
+    </div>
+
+    <div class="mx-auto mt-12 max-w-3xl space-y-4">
+      {faqs.map((faq) => (
+        <details class="group rounded-2xl border border-slate-700/40 bg-slate-900 transition-colors hover:border-slate-600/60">
+          <summary class="flex cursor-pointer items-center justify-between px-6 py-5 text-sm font-medium text-slate-100 md:text-base [&::-webkit-details-marker]:hidden">
+            {faq.question}
+            <svg class="h-5 w-5 shrink-0 text-slate-500 transition-transform group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-sm leading-relaxed text-slate-400">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

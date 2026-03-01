@@ -1,0 +1,56 @@
+---
+import Badge from './Badge.astro';
+
+const steps = [
+  {
+    number: '01',
+    title: 'Define Spec',
+    description: 'Goal, Scope und Definition of Done festlegen. Klare Erfolgskriterien vor dem ersten Run.',
+  },
+  {
+    number: '02',
+    title: 'Build DAG',
+    description: 'Nodes und Dependencies als gerichteten azyklischen Graphen definieren. Smoke Test vor Execution.',
+  },
+  {
+    number: '03',
+    title: 'Run & Verify',
+    description: 'OpenClaw exekutiert. DAGx verifiziert gegen DoD und triggert automatische Patch-Loops bei Abweichung.',
+  },
+  {
+    number: '04',
+    title: 'Score & Compare',
+    description: 'J-Funktion bewertet jeden Run. DNA-Level Fitness vergleicht Konfigurationsvarianten gegeneinander.',
+  },
+  {
+    number: '05',
+    title: 'Promote & Deliver',
+    description: 'Preferred Snapshot auswählen, Delivery Package schnüren. Audit-Trail dokumentiert jede Entscheidung.',
+  },
+];
+---
+
+<section class="py-20 md:py-28">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="animate-fade-in-up mx-auto max-w-3xl text-center">
+      <Badge text="Workflow" variant="accent" />
+      <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-100 md:text-3xl">
+        Vom Spec zum Delivery in 5 Schritten
+      </h2>
+    </div>
+
+    <div class="mt-12 space-y-4">
+      {steps.map((step) => (
+        <div class="group flex gap-5 rounded-2xl border border-slate-700/40 bg-slate-900 p-5 transition-colors hover:border-slate-600/60 md:p-6">
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-sm font-semibold text-indigo-400">
+            {step.number}
+          </div>
+          <div>
+            <h3 class="text-base font-semibold text-slate-100 md:text-lg">{step.title}</h3>
+            <p class="mt-1 text-sm text-slate-400 md:text-base">{step.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

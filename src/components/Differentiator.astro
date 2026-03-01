@@ -1,0 +1,44 @@
+---
+import Badge from './Badge.astro';
+
+const rows = [
+  { label: 'Output', left: 'Einmalige Antworten', right: 'Versionierte Runs' },
+  { label: 'Qualität', left: 'Subjektiv', right: 'DoD + Verify/Patch' },
+  { label: 'Governance', left: 'Keiner', right: 'Audit + Approvals' },
+  { label: 'Optimierung', left: 'Manuell', right: 'Score/Fitness/Compare' },
+  { label: 'Kosten', left: 'Unklar', right: 'Energy Controller + Budgets' },
+  { label: 'Skalierung', left: 'Kontextkopie', right: 'Artefakt-Backbone' },
+];
+---
+
+<section class="py-20 md:py-28">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="animate-fade-in-up mx-auto max-w-3xl text-center">
+      <Badge text="Differentiator" variant="accent" />
+      <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-100 md:text-3xl">
+        Nicht ein weiteres AI-Frontend
+      </h2>
+    </div>
+
+    <div class="mt-12 overflow-x-auto">
+      <table class="w-full min-w-[560px] border-collapse">
+        <thead>
+          <tr>
+            <th class="w-1/6 border-b border-slate-700/40 pb-4 text-left text-xs font-medium uppercase tracking-wider text-slate-500"></th>
+            <th class="w-5/12 border-b border-slate-700/40 pb-4 text-left text-sm font-medium text-slate-500">Chat/Prompt Tools</th>
+            <th class="w-5/12 border-b border-slate-700/40 pb-4 text-left text-sm font-medium text-indigo-400">DAGx Control Layer</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr class="border-b border-slate-700/20">
+              <td class="py-4 pr-4 text-sm font-medium text-slate-300">{row.label}</td>
+              <td class="py-4 pr-4 text-sm text-slate-500">{row.left}</td>
+              <td class="py-4 text-sm text-slate-200">{row.right}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
