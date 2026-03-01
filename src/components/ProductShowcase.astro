@@ -5,6 +5,7 @@ const screens = [
   {
     id: 'dashboard',
     label: 'Dashboard',
+    icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
     description: 'Live-Monitoring mit J-Kostenfunktion, Team Load, System Health und Delivery Pipeline — alles auf einen Blick.',
     src: '/screenshots/dagx-operator-console-dashboard.png',
     alt: 'DAGx Operator Console Dashboard mit J-Kostenfunktion Score, Team Load Übersicht, Evolution Tracking und System Health Monitoring',
@@ -12,6 +13,7 @@ const screens = [
   {
     id: 'office',
     label: 'Office',
+    icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
     description: 'Agent-Übersicht mit Status, Aktivität und Team-Zuordnung — dein virtuelles Büro für alle AI-Agents.',
     src: '/screenshots/dagx-office-agent-overview.png',
     alt: 'DAGx Office Ansicht mit Agent-Übersicht, Aktivitätsstatus und Team-Zuordnung für AI-Agent-Management',
@@ -19,6 +21,7 @@ const screens = [
   {
     id: 'team',
     label: 'Teams',
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
     description: '5 Teams, 10 Agents, klare Zuordnung — Development, Growth, Creative, Business und Operations mit Live-Status.',
     src: '/screenshots/dagx-team-structure-agent-management.png',
     alt: 'DAGx Team Structure mit 5 Teams: Development, Growth, Creative, Business und Operations — Agent-Management und Rollenverteilung',
@@ -26,6 +29,7 @@ const screens = [
   {
     id: 'blueprints',
     label: 'Blueprints',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
     description: 'DAG-Templates für wiederholbare Workflows — von Social Media Kampagnen bis Code Review Automatisierung.',
     src: '/screenshots/dagx-blueprints-dag-workflow-templates.png',
     alt: 'DAGx Blueprints mit DAG-Workflow-Templates: Social Media Kampagne, Landing Page Builder, Code Review Automatisierung und SEO-Workflows',
@@ -33,13 +37,17 @@ const screens = [
 ];
 ---
 
-<section id="showcase" class="relative py-20 md:py-28">
-  <!-- Background glow -->
-  <div class="pointer-events-none absolute inset-0 overflow-hidden">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[700px] rounded-full bg-indigo-500/5 blur-3xl"></div>
+<div class="section-glow-divider mx-auto max-w-4xl"></div>
+
+<section id="showcase" class="relative py-20 md:py-28 overflow-hidden">
+  <!-- Background effects -->
+  <div class="pointer-events-none absolute inset-0">
+    <div class="absolute top-1/4 right-0 h-[600px] w-[600px] -translate-y-1/2 translate-x-1/3 rounded-full bg-indigo-500/[0.03] blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 h-[400px] w-[500px] translate-y-1/4 -translate-x-1/4 rounded-full bg-slate-700/[0.05] blur-3xl"></div>
   </div>
 
   <div class="relative mx-auto max-w-6xl px-6">
+    <!-- Header -->
     <div class="animate-fade-in-up mx-auto max-w-3xl text-center">
       <Badge text="Product Preview" variant="accent" />
       <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-100 md:text-3xl">
@@ -51,65 +59,149 @@ const screens = [
     </div>
 
     <!-- Tab Navigation -->
-    <div class="mt-12 flex justify-center">
-      <div class="inline-flex rounded-xl border border-slate-700/40 bg-slate-900/60 p-1 backdrop-blur-sm">
+    <div class="mt-12 flex justify-center" role="tablist" aria-label="Product Screenshots">
+      <div class="showcase-tabs inline-flex rounded-2xl border border-slate-700/30 bg-slate-900/50 p-1.5 backdrop-blur-xl">
         {screens.map((screen, i) => (
           <button
             class:list={[
-              'showcase-tab rounded-lg px-4 py-2.5 text-sm font-medium transition-all',
-              i === 0 ? 'bg-indigo-500/20 text-slate-100' : 'text-slate-400 hover:text-slate-200',
+              'showcase-tab group relative flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium cursor-pointer transition-all duration-300',
+              i === 0
+                ? 'showcase-tab--active bg-slate-800/80 text-slate-100 shadow-lg shadow-black/10'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/30',
             ]}
             data-tab={screen.id}
+            role="tab"
             aria-selected={i === 0 ? 'true' : 'false'}
+            aria-controls={`panel-${screen.id}`}
           >
-            {screen.label}
+            <svg class="h-4 w-4 shrink-0 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d={screen.icon} />
+            </svg>
+            <span class="hidden sm:inline">{screen.label}</span>
+            {i === 0 && (
+              <span class="showcase-tab-glow absolute inset-0 rounded-xl ring-1 ring-indigo-500/20"></span>
+            )}
           </button>
         ))}
       </div>
     </div>
 
-    <!-- Screenshot Panels -->
-    <div class="mt-8">
+    <!-- Screenshot Display -->
+    <div class="showcase-viewport mt-10 animate-fade-in-up animate-delay-200">
       {screens.map((screen, i) => (
         <div
           class:list={[
-            'showcase-panel',
-            i === 0 ? '' : 'hidden',
+            'showcase-panel transition-all duration-500',
+            i === 0 ? 'showcase-panel--visible' : 'showcase-panel--hidden',
           ]}
           data-panel={screen.id}
+          id={`panel-${screen.id}`}
+          role="tabpanel"
+          aria-hidden={i !== 0 ? 'true' : 'false'}
         >
-          <!-- Description -->
-          <p class="mb-6 text-center text-sm text-slate-400 md:text-base">
+          <!-- Description pill -->
+          <p class="mb-8 text-center text-sm text-slate-400 md:text-base max-w-2xl mx-auto">
             {screen.description}
           </p>
 
-          <!-- Screenshot Container -->
-          <div class="group relative overflow-hidden rounded-2xl border border-slate-700/40 bg-slate-900/40 shadow-2xl shadow-black/20">
-            <!-- Browser chrome mockup -->
-            <div class="flex items-center gap-2 border-b border-slate-700/40 bg-slate-900/80 px-4 py-3">
-              <span class="h-3 w-3 rounded-full bg-red-400/40"></span>
-              <span class="h-3 w-3 rounded-full bg-yellow-400/40"></span>
-              <span class="h-3 w-3 rounded-full bg-green-400/40"></span>
-              <span class="ml-3 text-xs text-slate-500">app.dagx.agency</span>
+          <!-- Browser Mockup with perspective -->
+          <div class="showcase-browser group relative mx-auto max-w-5xl">
+            <!-- Glow behind browser -->
+            <div class="pointer-events-none absolute -inset-4 rounded-3xl bg-indigo-500/[0.03] blur-2xl transition-opacity duration-500 group-hover:bg-indigo-500/[0.06]"></div>
+
+            <!-- Browser frame -->
+            <div class="relative overflow-hidden rounded-2xl border border-slate-700/30 bg-slate-900/60 shadow-2xl shadow-black/30 backdrop-blur-sm transition-all duration-500 group-hover:border-slate-600/40 group-hover:shadow-black/40">
+              <!-- Title bar -->
+              <div class="flex items-center justify-between border-b border-slate-700/30 bg-slate-900/90 px-4 py-3">
+                <div class="flex items-center gap-2">
+                  <span class="h-3 w-3 rounded-full bg-[#ff5f57]/60 transition-colors group-hover:bg-[#ff5f57]"></span>
+                  <span class="h-3 w-3 rounded-full bg-[#febc2e]/60 transition-colors group-hover:bg-[#febc2e]"></span>
+                  <span class="h-3 w-3 rounded-full bg-[#28c840]/60 transition-colors group-hover:bg-[#28c840]"></span>
+                </div>
+                <div class="flex items-center gap-2 rounded-lg bg-slate-800/60 px-3 py-1">
+                  <svg class="h-3 w-3 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                  <span class="text-xs text-slate-500">app.dagx.agency</span>
+                </div>
+                <div class="w-[52px]"></div>
+              </div>
+
+              <!-- Screenshot image -->
+              <div class="relative overflow-hidden">
+                <img
+                  src={screen.src}
+                  alt={screen.alt}
+                  width="1400"
+                  height="900"
+                  class="w-full transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+                <!-- Edge fade overlays -->
+                <div class="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-slate-950/50 to-transparent"></div>
+                <div class="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-slate-950/20 to-transparent"></div>
+                <div class="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-slate-950/20 to-transparent"></div>
+              </div>
             </div>
 
-            <!-- Image -->
-            <img
-              src={screen.src}
-              alt={screen.alt}
-              class="w-full transition-transform duration-500 group-hover:scale-[1.02]"
-              loading={i === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-            />
-
-            <!-- Subtle gradient overlay at bottom -->
-            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950/40 to-transparent"></div>
+            <!-- Reflection / shadow below -->
+            <div class="pointer-events-none mx-8 mt-[-1px] h-8 rounded-b-2xl bg-gradient-to-b from-slate-800/20 to-transparent blur-sm"></div>
           </div>
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  /* Panel visibility transitions */
+  .showcase-panel--visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .showcase-panel--hidden {
+    display: none;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  /* Active tab subtle glow */
+  .showcase-tab--active {
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  /* Browser perspective on hover */
+  .showcase-browser {
+    perspective: 1200px;
+  }
+
+  .showcase-browser > .relative {
+    transition: transform 0.5s ease-out;
+  }
+
+  .showcase-browser:hover > .relative {
+    transform: rotateX(1deg);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .showcase-panel--visible,
+    .showcase-panel--hidden {
+      transition: none;
+    }
+    .showcase-browser:hover > .relative {
+      transform: none;
+    }
+    .showcase-browser img {
+      transition: none;
+    }
+  }
+</style>
 
 <script>
   const tabs = document.querySelectorAll('.showcase-tab');
@@ -121,17 +213,37 @@ const screens = [
 
       // Update tabs
       tabs.forEach((t) => {
-        const isActive = (t as HTMLElement).dataset.tab === target;
-        t.classList.toggle('bg-indigo-500/20', isActive);
-        t.classList.toggle('text-slate-100', isActive);
-        t.classList.toggle('text-slate-400', !isActive);
-        t.setAttribute('aria-selected', String(isActive));
+        const el = t as HTMLElement;
+        const isActive = el.dataset.tab === target;
+
+        // Toggle active classes
+        el.classList.toggle('showcase-tab--active', isActive);
+        el.classList.toggle('bg-slate-800/80', isActive);
+        el.classList.toggle('text-slate-100', isActive);
+        el.classList.toggle('shadow-lg', isActive);
+        el.classList.toggle('shadow-black/10', isActive);
+        el.classList.toggle('text-slate-400', !isActive);
+        el.classList.toggle('hover:text-slate-200', !isActive);
+        el.classList.toggle('hover:bg-slate-800/30', !isActive);
+        el.setAttribute('aria-selected', String(isActive));
+
+        // Toggle glow ring
+        const glow = el.querySelector('.showcase-tab-glow');
+        if (glow) glow.remove();
+        if (isActive) {
+          const ring = document.createElement('span');
+          ring.className = 'showcase-tab-glow absolute inset-0 rounded-xl ring-1 ring-indigo-500/20';
+          el.appendChild(ring);
+        }
       });
 
-      // Update panels
+      // Update panels with fade transition
       panels.forEach((p) => {
-        const isActive = (p as HTMLElement).dataset.panel === target;
-        p.classList.toggle('hidden', !isActive);
+        const el = p as HTMLElement;
+        const isActive = el.dataset.panel === target;
+        el.classList.toggle('showcase-panel--visible', isActive);
+        el.classList.toggle('showcase-panel--hidden', !isActive);
+        el.setAttribute('aria-hidden', String(!isActive));
       });
     });
   });
