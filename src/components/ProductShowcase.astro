@@ -1,0 +1,138 @@
+---
+import Badge from './Badge.astro';
+
+const screens = [
+  {
+    id: 'dashboard',
+    label: 'Dashboard',
+    description: 'Live-Monitoring mit J-Kostenfunktion, Team Load, System Health und Delivery Pipeline — alles auf einen Blick.',
+    src: '/screenshots/dagx-operator-console-dashboard.png',
+    alt: 'DAGx Operator Console Dashboard mit J-Kostenfunktion Score, Team Load Übersicht, Evolution Tracking und System Health Monitoring',
+  },
+  {
+    id: 'office',
+    label: 'Office',
+    description: 'Agent-Übersicht mit Status, Aktivität und Team-Zuordnung — dein virtuelles Büro für alle AI-Agents.',
+    src: '/screenshots/dagx-office-agent-overview.png',
+    alt: 'DAGx Office Ansicht mit Agent-Übersicht, Aktivitätsstatus und Team-Zuordnung für AI-Agent-Management',
+  },
+  {
+    id: 'team',
+    label: 'Teams',
+    description: '5 Teams, 10 Agents, klare Zuordnung — Development, Growth, Creative, Business und Operations mit Live-Status.',
+    src: '/screenshots/dagx-team-structure-agent-management.png',
+    alt: 'DAGx Team Structure mit 5 Teams: Development, Growth, Creative, Business und Operations — Agent-Management und Rollenverteilung',
+  },
+  {
+    id: 'blueprints',
+    label: 'Blueprints',
+    description: 'DAG-Templates für wiederholbare Workflows — von Social Media Kampagnen bis Code Review Automatisierung.',
+    src: '/screenshots/dagx-blueprints-dag-workflow-templates.png',
+    alt: 'DAGx Blueprints mit DAG-Workflow-Templates: Social Media Kampagne, Landing Page Builder, Code Review Automatisierung und SEO-Workflows',
+  },
+];
+---
+
+<section id="showcase" class="relative py-20 md:py-28">
+  <!-- Background glow -->
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[700px] rounded-full bg-indigo-500/5 blur-3xl"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-6xl px-6">
+    <div class="animate-fade-in-up mx-auto max-w-3xl text-center">
+      <Badge text="Product Preview" variant="accent" />
+      <h2 class="mt-4 text-2xl font-semibold tracking-tight text-slate-100 md:text-3xl">
+        So sieht DAGx in Aktion aus
+      </h2>
+      <p class="mt-4 text-base text-slate-400 md:text-lg">
+        Operator Console, Team Management und Blueprint-Workflows — eine Plattform für volle Kontrolle.
+      </p>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="mt-12 flex justify-center">
+      <div class="inline-flex rounded-xl border border-slate-700/40 bg-slate-900/60 p-1 backdrop-blur-sm">
+        {screens.map((screen, i) => (
+          <button
+            class:list={[
+              'showcase-tab rounded-lg px-4 py-2.5 text-sm font-medium transition-all',
+              i === 0 ? 'bg-indigo-500/20 text-slate-100' : 'text-slate-400 hover:text-slate-200',
+            ]}
+            data-tab={screen.id}
+            aria-selected={i === 0 ? 'true' : 'false'}
+          >
+            {screen.label}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Screenshot Panels -->
+    <div class="mt-8">
+      {screens.map((screen, i) => (
+        <div
+          class:list={[
+            'showcase-panel',
+            i === 0 ? '' : 'hidden',
+          ]}
+          data-panel={screen.id}
+        >
+          <!-- Description -->
+          <p class="mb-6 text-center text-sm text-slate-400 md:text-base">
+            {screen.description}
+          </p>
+
+          <!-- Screenshot Container -->
+          <div class="group relative overflow-hidden rounded-2xl border border-slate-700/40 bg-slate-900/40 shadow-2xl shadow-black/20">
+            <!-- Browser chrome mockup -->
+            <div class="flex items-center gap-2 border-b border-slate-700/40 bg-slate-900/80 px-4 py-3">
+              <span class="h-3 w-3 rounded-full bg-red-400/40"></span>
+              <span class="h-3 w-3 rounded-full bg-yellow-400/40"></span>
+              <span class="h-3 w-3 rounded-full bg-green-400/40"></span>
+              <span class="ml-3 text-xs text-slate-500">app.dagx.agency</span>
+            </div>
+
+            <!-- Image -->
+            <img
+              src={screen.src}
+              alt={screen.alt}
+              class="w-full transition-transform duration-500 group-hover:scale-[1.02]"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+
+            <!-- Subtle gradient overlay at bottom -->
+            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950/40 to-transparent"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll('.showcase-tab');
+  const panels = document.querySelectorAll('.showcase-panel');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = (tab as HTMLElement).dataset.tab;
+
+      // Update tabs
+      tabs.forEach((t) => {
+        const isActive = (t as HTMLElement).dataset.tab === target;
+        t.classList.toggle('bg-indigo-500/20', isActive);
+        t.classList.toggle('text-slate-100', isActive);
+        t.classList.toggle('text-slate-400', !isActive);
+        t.setAttribute('aria-selected', String(isActive));
+      });
+
+      // Update panels
+      panels.forEach((p) => {
+        const isActive = (p as HTMLElement).dataset.panel === target;
+        p.classList.toggle('hidden', !isActive);
+      });
+    });
+  });
+</script>
