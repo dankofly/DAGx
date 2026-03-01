@@ -1,4 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <rect width="32" height="32" rx="6" fill="#091f36"/>
-  <text x="5" y="23" font-family="system-ui,sans-serif" font-size="18" font-weight="700" fill="#bf4f53">Dx</text>
+  <defs>
+    <linearGradient id="fx1" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#26C6DA"/>
+      <stop offset="100%" stop-color="#FF9800"/>
+    </linearGradient>
+    <linearGradient id="fx2" x1="1" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#26C6DA"/>
+      <stop offset="100%" stop-color="#FF9800"/>
+    </linearGradient>
+  </defs>
+  <!-- D bracket -->
+  <path d="M 2 3 H 10 L 16 16 L 10 29 H 2 V 22 H 7 L 12 16 L 7 10 H 2 Z" fill="#1E88E5"/>
+  <!-- X arms -->
+  <polygon points="14,3 17,3 30,29 27,29" fill="url(#fx1)"/>
+  <polygon points="27,3 30,3 17,29 14,29" fill="url(#fx2)"/>
 </svg>

@@ -1,77 +1,465 @@
 ---
 import Badge from './Badge.astro';
+import Logo from './Logo.astro';
 ---
 
 <section class="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
-  <div class="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-2 md:items-center">
+
+  <!-- ===== BACKGROUND EFFECTS ===== -->
+
+  <!-- Radial glow: top-right, Redline -->
+  <div
+    class="pointer-events-none absolute -top-40 -right-40 h-175 w-175 rounded-full"
+    style="background: radial-gradient(circle, rgba(158,54,58,0.15) 0%, transparent 70%);"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Radial glow: bottom-left, Blue Popsicle -->
+  <div
+    class="pointer-events-none absolute -bottom-60 -left-60 h-200 w-200 rounded-full"
+    style="background: radial-gradient(circle, rgba(15,40,98,0.20) 0%, transparent 70%);"
+    aria-hidden="true"
+  ></div>
+
+  <!-- CSS dot grid overlay -->
+  <div
+    class="hero-dot-grid pointer-events-none absolute inset-0"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Noise texture via inline SVG filter -->
+  <svg class="absolute inset-0 h-full w-full pointer-events-none opacity-[0.03]" aria-hidden="true">
+    <filter id="hero-noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+      <feColorMatrix type="saturate" values="0" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#hero-noise)" />
+  </svg>
+
+  <!-- ===== FLOATING PARTICLES ===== -->
+  <div class="hero-particle hero-particle--1 pointer-events-none absolute" aria-hidden="true"></div>
+  <div class="hero-particle hero-particle--2 pointer-events-none absolute" aria-hidden="true"></div>
+  <div class="hero-particle hero-particle--3 pointer-events-none absolute" aria-hidden="true"></div>
+  <div class="hero-particle hero-particle--4 pointer-events-none absolute" aria-hidden="true"></div>
+  <div class="hero-particle hero-particle--5 pointer-events-none absolute" aria-hidden="true"></div>
+
+  <!-- ===== MAIN CONTENT GRID ===== -->
+  <div class="relative z-10 mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-2 md:items-center">
+
+    <!-- LEFT COLUMN: Text content -->
     <div class="animate-fade-in-up">
-      <Badge text="Open Beta — Q3 2026" variant="accent" />
-      <h1 class="mt-6 text-4xl font-semibold tracking-tight text-slate-100 md:text-6xl">
-        DAGx: Der Orchestrierungs-Layer für OpenClaw.
+
+      <!-- Logo -->
+      <Logo size="lg" class="mb-6 opacity-90" />
+
+      <!-- Badge with pulsing glow ring -->
+      <div class="hero-badge-wrapper relative inline-block">
+        <span class="hero-badge-glow" aria-hidden="true"></span>
+        <Badge text="Open Beta — Q3 2026" variant="accent" />
+      </div>
+
+      <!-- Headline with gradient text -->
+      <h1 class="hero-headline mt-6 text-4xl font-semibold tracking-tight md:text-6xl">
+        DAGx: Der Orchestrierungs-Layer f&uuml;r OpenClaw.
       </h1>
+
+      <!-- Subtext -->
       <p class="mt-6 text-base leading-relaxed text-slate-300 md:text-lg">
-        OpenClaw führt aus. DAGx steuert, versioniert und optimiert Workflows mit DAG, DNA und messbarer Governance.
+        OpenClaw f&uuml;hrt aus. DAGx steuert, versioniert und optimiert Workflows mit DAG, DNA und messbarer Governance.
       </p>
+
+      <!-- CTA Buttons -->
       <div class="mt-8 flex flex-wrap gap-4">
+        <!-- Primary: shimmer sweep -->
         <a
           href="#early-access"
-          class="inline-flex items-center rounded-lg bg-gradient-to-r from-indigo-500 to-violet-500 px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+          class="hero-cta-primary relative inline-flex items-center overflow-hidden rounded-lg bg-linear-to-r from-indigo-500 to-violet-500 px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
         >
-          Early Access anfragen
+          <span class="relative z-10">Early Access anfragen</span>
+          <span class="hero-shimmer" aria-hidden="true"></span>
         </a>
+
+        <!-- Secondary: glass effect -->
         <a
           href="#architektur"
-          class="inline-flex items-center rounded-lg border border-slate-700/40 bg-slate-900 px-6 py-3 text-sm font-medium text-slate-300 transition-colors hover:border-slate-600/60 hover:text-slate-100"
+          class="hero-cta-secondary inline-flex items-center rounded-lg border border-white/10 px-6 py-3 text-sm font-medium text-slate-300 backdrop-blur transition-all hover:border-white/25 hover:text-slate-100"
+          style="background: rgba(255,255,255,0.05);"
         >
           Architektur ansehen
         </a>
       </div>
     </div>
 
+    <!-- RIGHT COLUMN: Architecture diagram SVG -->
     <div class="animate-fade-in-up animate-delay-200 flex justify-center">
-      <svg viewBox="0 0 400 340" fill="none" class="w-full max-w-md" aria-label="DAGx Architektur-Diagramm: DAGx Control Layer über OpenClaw Execution Engine">
-        <!-- OpenClaw Execution Engine -->
-        <rect x="40" y="200" width="320" height="100" rx="16" fill="#0f2862" stroke="#4f5f76" stroke-width="1.5"/>
-        <text x="200" y="238" text-anchor="middle" fill="#b3bfce" font-size="11" font-weight="500">OPENCLAW</text>
-        <text x="200" y="256" text-anchor="middle" fill="#4f5f76" font-size="10">Execution Engine</text>
+      <svg
+        viewBox="0 0 400 340"
+        fill="none"
+        class="w-full max-w-md"
+        aria-label="DAGx Architektur-Diagramm: DAGx Control Layer orchestriert die OpenClaw Execution Engine"
+        role="img"
+      >
+        <!-- SVG Filters for glow effects -->
+        <defs>
+          <!-- Redline glow for DAGx box -->
+          <filter id="glow-red" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
 
-        <!-- Engine Nodes -->
-        <rect x="70" y="268" width="60" height="20" rx="4" fill="#091f36" stroke="#4f5f76" stroke-width="1"/>
-        <text x="100" y="282" text-anchor="middle" fill="#4f5f76" font-size="8">Sessions</text>
-        <rect x="145" y="268" width="50" height="20" rx="4" fill="#091f36" stroke="#4f5f76" stroke-width="1"/>
-        <text x="170" y="282" text-anchor="middle" fill="#4f5f76" font-size="8">Tools</text>
-        <rect x="210" y="268" width="60" height="20" rx="4" fill="#091f36" stroke="#4f5f76" stroke-width="1"/>
-        <text x="240" y="282" text-anchor="middle" fill="#4f5f76" font-size="8">Runtime</text>
-        <rect x="285" y="268" width="55" height="20" rx="4" fill="#091f36" stroke="#4f5f76" stroke-width="1"/>
-        <text x="312.5" y="282" text-anchor="middle" fill="#4f5f76" font-size="8">Agents</text>
+          <!-- Subtle node glow -->
+          <filter id="glow-node" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
 
-        <!-- DAGx Control Layer -->
-        <rect x="40" y="40" width="320" height="130" rx="16" fill="#091f36" stroke="#9e363a" stroke-width="1.5"/>
+          <!-- Arrow glow -->
+          <filter id="glow-arrow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+
+          <!-- Gradient for traveling dot -->
+          <radialGradient id="dot-gradient">
+            <stop offset="0%" stop-color="#d47275" />
+            <stop offset="100%" stop-color="#9e363a" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+
+        <!-- ===== DAGx Control Layer box ===== -->
+        <rect
+          x="40" y="40" width="320" height="130" rx="16"
+          fill="#091f36" stroke="#9e363a" stroke-width="1.5"
+          filter="url(#glow-red)"
+        />
         <text x="200" y="72" text-anchor="middle" fill="#d47275" font-size="11" font-weight="600">DAGx</text>
         <text x="200" y="88" text-anchor="middle" fill="#bf4f53" font-size="10">Control Layer</text>
 
-        <!-- DAG Nodes -->
-        <circle cx="90" cy="125" r="14" fill="#2a1015" stroke="#9e363a" stroke-width="1.5"/>
-        <text x="90" y="129" text-anchor="middle" fill="#d47275" font-size="8">DAG</text>
-        <circle cx="155" cy="125" r="14" fill="#2a1015" stroke="#9e363a" stroke-width="1.5"/>
-        <text x="155" y="129" text-anchor="middle" fill="#d47275" font-size="8">DNA</text>
-        <circle cx="220" cy="125" r="14" fill="#2a1015" stroke="#9e363a" stroke-width="1.5"/>
-        <text x="220" y="129" text-anchor="middle" fill="#d47275" font-size="8">Score</text>
-        <circle cx="285" cy="125" r="14" fill="#2a1015" stroke="#9e363a" stroke-width="1.5"/>
-        <text x="285" y="129" text-anchor="middle" fill="#d47275" font-size="8">Exp</text>
+        <!-- DAG nodes (circles) with pulse animation -->
+        <circle class="hero-node-pulse" cx="90" cy="125" r="14" fill="#2a1015" stroke="#9e363a" stroke-width="1.5" filter="url(#glow-node)" />
+        <text x="90" y="129" text-anchor="middle" fill="#d47275" font-size="8" font-weight="500">DAG</text>
 
-        <!-- Edges between DAG nodes -->
-        <line x1="104" y1="125" x2="141" y2="125" stroke="#852d30" stroke-width="1" stroke-dasharray="4 3"/>
-        <line x1="169" y1="125" x2="206" y2="125" stroke="#852d30" stroke-width="1" stroke-dasharray="4 3"/>
-        <line x1="234" y1="125" x2="271" y2="125" stroke="#852d30" stroke-width="1" stroke-dasharray="4 3"/>
+        <circle class="hero-node-pulse hero-node-pulse--2" cx="155" cy="125" r="14" fill="#2a1015" stroke="#9e363a" stroke-width="1.5" filter="url(#glow-node)" />
+        <text x="155" y="129" text-anchor="middle" fill="#d47275" font-size="8" font-weight="500">DNA</text>
 
-        <!-- Connection arrows -->
-        <line x1="200" y1="170" x2="200" y2="200" stroke="#9e363a" stroke-width="1.5" stroke-dasharray="6 4"/>
-        <polygon points="194,196 200,206 206,196" fill="#9e363a"/>
+        <circle class="hero-node-pulse hero-node-pulse--3" cx="220" cy="125" r="14" fill="#2a1015" stroke="#9e363a" stroke-width="1.5" filter="url(#glow-node)" />
+        <text x="220" y="129" text-anchor="middle" fill="#d47275" font-size="8" font-weight="500">Score</text>
 
-        <!-- Side labels -->
+        <circle class="hero-node-pulse hero-node-pulse--4" cx="285" cy="125" r="14" fill="#2a1015" stroke="#9e363a" stroke-width="1.5" filter="url(#glow-node)" />
+        <text x="285" y="129" text-anchor="middle" fill="#d47275" font-size="8" font-weight="500">Exp</text>
+
+        <!-- Dashed edges between DAG nodes (marching ants) -->
+        <line class="hero-dash-march" x1="104" y1="125" x2="141" y2="125" stroke="#852d30" stroke-width="1" stroke-dasharray="4 3" />
+        <line class="hero-dash-march hero-dash-march--2" x1="169" y1="125" x2="206" y2="125" stroke="#852d30" stroke-width="1" stroke-dasharray="4 3" />
+        <line class="hero-dash-march hero-dash-march--3" x1="234" y1="125" x2="271" y2="125" stroke="#852d30" stroke-width="1" stroke-dasharray="4 3" />
+
+        <!-- ===== Connection arrow between layers ===== -->
+        <line
+          class="hero-dash-march hero-dash-march--4"
+          x1="200" y1="170" x2="200" y2="200"
+          stroke="#9e363a" stroke-width="1.5" stroke-dasharray="6 4"
+          filter="url(#glow-arrow)"
+        />
+        <polygon points="194,196 200,206 206,196" fill="#9e363a" filter="url(#glow-arrow)" />
+
+        <!-- "orchestrates" label -->
         <text x="200" y="188" text-anchor="middle" fill="#852d30" font-size="8" font-weight="500">orchestrates</text>
+
+        <!-- Traveling dot along connection arrow -->
+        <circle class="hero-travel-dot" cx="200" cy="170" r="3" fill="url(#dot-gradient)" opacity="0.9" />
+
+        <!-- ===== OpenClaw Execution Engine box ===== -->
+        <rect
+          x="40" y="200" width="320" height="100" rx="16"
+          fill="#0f2862" stroke="#4f5f76" stroke-width="1.5"
+        />
+        <text x="200" y="238" text-anchor="middle" fill="#b3bfce" font-size="11" font-weight="500">OPENCLAW</text>
+        <text x="200" y="256" text-anchor="middle" fill="#4f5f76" font-size="10">Execution Engine</text>
+
+        <!-- Engine node rects -->
+        <rect x="70" y="268" width="60" height="20" rx="4" fill="#091f36" stroke="#4f5f76" stroke-width="1" />
+        <text x="100" y="282" text-anchor="middle" fill="#4f5f76" font-size="8">Sessions</text>
+
+        <rect x="145" y="268" width="50" height="20" rx="4" fill="#091f36" stroke="#4f5f76" stroke-width="1" />
+        <text x="170" y="282" text-anchor="middle" fill="#4f5f76" font-size="8">Tools</text>
+
+        <rect x="210" y="268" width="60" height="20" rx="4" fill="#091f36" stroke="#4f5f76" stroke-width="1" />
+        <text x="240" y="282" text-anchor="middle" fill="#4f5f76" font-size="8">Runtime</text>
+
+        <rect x="285" y="268" width="55" height="20" rx="4" fill="#091f36" stroke="#4f5f76" stroke-width="1" />
+        <text x="312.5" y="282" text-anchor="middle" fill="#4f5f76" font-size="8">Agents</text>
       </svg>
     </div>
   </div>
 </section>
+
+<style>
+  /* ===== DOT GRID OVERLAY ===== */
+  .hero-dot-grid {
+    background-image: radial-gradient(rgba(158,54,58,0.12) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.4;
+  }
+
+  /* ===== HEADLINE GRADIENT TEXT ===== */
+  .hero-headline {
+    background: linear-gradient(135deg, #d47275 0%, #e8edf3 40%, #26C6DA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ===== BADGE PULSING GLOW RING ===== */
+  .hero-badge-wrapper {
+    position: relative;
+  }
+
+  .hero-badge-glow {
+    position: absolute;
+    inset: -3px;
+    border-radius: 9999px;
+    background: transparent;
+    border: 1px solid rgba(158,54,58,0.3);
+    animation: badge-pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes badge-pulse {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(158,54,58,0.2);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.04);
+      box-shadow: 0 0 12px 2px rgba(158,54,58,0.15);
+    }
+  }
+
+  /* ===== PRIMARY CTA SHIMMER SWEEP ===== */
+  .hero-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255,255,255,0.15) 45%,
+      rgba(255,255,255,0.25) 50%,
+      rgba(255,255,255,0.15) 55%,
+      transparent 80%
+    );
+    animation: shimmer-sweep 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer-sweep {
+    0% {
+      transform: translateX(-120%);
+    }
+    60%, 100% {
+      transform: translateX(120%);
+    }
+  }
+
+  /* ===== SVG MARCHING ANTS (dashed lines) ===== */
+  .hero-dash-march {
+    animation: dash-march 1.2s linear infinite;
+  }
+  .hero-dash-march--2 {
+    animation-delay: 0.15s;
+  }
+  .hero-dash-march--3 {
+    animation-delay: 0.3s;
+  }
+  .hero-dash-march--4 {
+    animation-delay: 0.1s;
+  }
+
+  @keyframes dash-march {
+    to {
+      stroke-dashoffset: -14;
+    }
+  }
+
+  /* ===== SVG NODE PULSE ===== */
+  .hero-node-pulse {
+    animation: node-pulse 3s ease-in-out infinite;
+  }
+  .hero-node-pulse--2 {
+    animation-delay: 0.4s;
+  }
+  .hero-node-pulse--3 {
+    animation-delay: 0.8s;
+  }
+  .hero-node-pulse--4 {
+    animation-delay: 1.2s;
+  }
+
+  @keyframes node-pulse {
+    0%, 100% {
+      opacity: 0.85;
+      transform-origin: center;
+    }
+    50% {
+      opacity: 1;
+      filter: drop-shadow(0 0 6px rgba(158,54,58,0.4));
+    }
+  }
+
+  /* ===== TRAVELING DOT along connection arrow ===== */
+  .hero-travel-dot {
+    animation: travel-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes travel-dot {
+    0% {
+      cy: 170;
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.9;
+    }
+    80% {
+      opacity: 0.9;
+    }
+    100% {
+      cy: 202;
+      opacity: 0;
+    }
+  }
+
+  /* ===== FLOATING PARTICLES ===== */
+  .hero-particle {
+    border-radius: 50%;
+    opacity: 0.2;
+  }
+
+  .hero-particle--1 {
+    width: 4px;
+    height: 4px;
+    top: 18%;
+    left: 12%;
+    background: #9e363a;
+    animation: particle-float-1 8s ease-in-out infinite;
+  }
+  .hero-particle--2 {
+    width: 3px;
+    height: 3px;
+    top: 65%;
+    right: 18%;
+    background: #26C6DA;
+    animation: particle-float-2 10s ease-in-out infinite;
+  }
+  .hero-particle--3 {
+    width: 5px;
+    height: 5px;
+    top: 40%;
+    left: 55%;
+    background: #1E88E5;
+    opacity: 0.12;
+    animation: particle-float-3 12s ease-in-out infinite;
+  }
+  .hero-particle--4 {
+    width: 3px;
+    height: 3px;
+    top: 80%;
+    left: 30%;
+    background: #FF9800;
+    opacity: 0.15;
+    animation: particle-float-1 9s ease-in-out infinite 1s;
+  }
+  .hero-particle--5 {
+    width: 4px;
+    height: 4px;
+    top: 25%;
+    right: 35%;
+    background: #d47275;
+    opacity: 0.15;
+    animation: particle-float-2 11s ease-in-out infinite 2s;
+  }
+
+  @keyframes particle-float-1 {
+    0%, 100% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(12px, -18px);
+    }
+    50% {
+      transform: translate(-8px, -30px);
+    }
+    75% {
+      transform: translate(6px, -12px);
+    }
+  }
+
+  @keyframes particle-float-2 {
+    0%, 100% {
+      transform: translate(0, 0);
+    }
+    33% {
+      transform: translate(-15px, 10px);
+    }
+    66% {
+      transform: translate(10px, -20px);
+    }
+  }
+
+  @keyframes particle-float-3 {
+    0%, 100% {
+      transform: translate(0, 0);
+    }
+    20% {
+      transform: translate(20px, -10px);
+    }
+    40% {
+      transform: translate(-5px, -25px);
+    }
+    60% {
+      transform: translate(15px, -15px);
+    }
+    80% {
+      transform: translate(-10px, 5px);
+    }
+  }
+
+  /* ===== REDUCED MOTION ===== */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-shimmer,
+    .hero-badge-glow {
+      animation: none;
+    }
+
+    .hero-dash-march,
+    .hero-dash-march--2,
+    .hero-dash-march--3,
+    .hero-dash-march--4 {
+      animation: none;
+    }
+
+    .hero-node-pulse,
+    .hero-node-pulse--2,
+    .hero-node-pulse--3,
+    .hero-node-pulse--4 {
+      animation: none;
+      opacity: 1;
+    }
+
+    .hero-travel-dot {
+      animation: none;
+      opacity: 0;
+    }
+
+    .hero-particle {
+      animation: none !important;
+    }
+  }
+</style>

@@ -1,0 +1,52 @@
+---
+interface Props {
+  class?: string;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const { class: className = '', size = 'md' } = Astro.props;
+
+const sizeClasses = {
+  sm: 'h-6',
+  md: 'h-8',
+  lg: 'h-10',
+};
+---
+
+<svg
+  viewBox="0 0 180 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  class:list={[sizeClasses[size], 'w-auto', className]}
+  aria-label="DAGx Logo"
+  role="img"
+>
+  <defs>
+    <linearGradient id="logo-x-1" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#26C6DA" />
+      <stop offset="100%" stop-color="#FF9800" />
+    </linearGradient>
+    <linearGradient id="logo-x-2" x1="1" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#26C6DA" />
+      <stop offset="100%" stop-color="#FF9800" />
+    </linearGradient>
+  </defs>
+
+  <!-- D bracket -->
+  <path
+    d="M 6 6 H 52 L 90 60 L 52 114 H 6 V 88 H 36 L 62 60 L 36 32 H 6 Z"
+    fill="#1E88E5"
+  />
+
+  <!-- X arm: top-left → bottom-right -->
+  <polygon
+    points="72,6 92,6 172,114 152,114"
+    fill="url(#logo-x-1)"
+  />
+
+  <!-- X arm: top-right → bottom-left -->
+  <polygon
+    points="152,6 172,6 92,114 72,114"
+    fill="url(#logo-x-2)"
+  />
+</svg>
