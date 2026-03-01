@@ -148,7 +148,7 @@ html {
 
 /* 9. Gradient text utility */
 .text-gradient-hero {
-  background: linear-gradient(135deg, #d47275, #e8edf3 40%, #26C6DA);
+  background: linear-gradient(135deg, #d47275, #e8edf3 40%, #b3bfce);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
