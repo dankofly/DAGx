@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://dagx.netlify.app',
+  site: 'https://dagx.agency',
   vite: {
     plugins: [tailwindcss()],
   },

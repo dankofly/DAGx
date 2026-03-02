@@ -1,5 +1,4 @@
 ---
-import Badge from './Badge.astro';
 import Logo from './Logo.astro';
 ---
 
@@ -52,42 +51,73 @@ import Logo from './Logo.astro';
       <!-- Logo -->
       <Logo size="lg" class="mb-6 opacity-90" />
 
-      <!-- Badge with pulsing glow ring -->
-      <div class="hero-badge-wrapper relative inline-block">
-        <span class="hero-badge-glow" aria-hidden="true"></span>
-        <Badge text="Open Beta — Q3 2026" variant="accent" />
-      </div>
+      <!-- Eyebrow -->
+      <p class="text-sm font-medium uppercase tracking-widest text-indigo-400">
+        AI-Orchestrierung für Agenturen
+      </p>
 
       <!-- Headline with gradient text -->
-      <h1 class="hero-headline mt-6 text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
-        <span class="block">DAGx:</span>
-        <span class="block">Der Orchestrierungs-</span>
-        <span class="block">Layer für OpenClaw.</span>
+      <h1 class="hero-headline mt-4 text-4xl font-semibold tracking-tight md:text-5xl">
+        <span class="block">Steuere deine AI-Agenten.</span>
+        <span class="block">Nicht deine Prompts.</span>
       </h1>
 
       <!-- Subtext -->
       <p class="mt-6 text-base leading-relaxed text-slate-300 md:text-lg">
-        OpenClaw f&uuml;hrt aus. DAGx steuert, versioniert und optimiert Workflows mit DAG, DNA und messbarer Governance.
+        DAGx gibt dir Versionierung, Qualitätskontrolle und Kostensteuerung
+        für AI-Workflows — als Control Layer über OpenClaw.
       </p>
 
-      <!-- CTA Buttons -->
-      <div class="mt-8 flex flex-wrap gap-4">
-        <!-- Primary: shimmer sweep -->
-        <a
-          href="#early-access"
-          class="hero-cta-primary relative inline-flex items-center overflow-hidden rounded-lg bg-linear-to-r from-indigo-500 to-violet-500 px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
-        >
-          <span class="relative z-10">Early Access anfragen</span>
-          <span class="hero-shimmer" aria-hidden="true"></span>
-        </a>
+      <!-- Early Access Form -->
+      <form
+        name="early-access"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="early-access-form mt-8"
+        id="early-access-form"
+      >
+        <input type="hidden" name="form-name" value="early-access" />
+        <p class="hidden">
+          <label>Nicht ausfüllen: <input name="bot-field" /></label>
+        </p>
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div class="relative flex-1">
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="deine@email.com"
+              autocomplete="email"
+              class="w-full rounded-lg border border-slate-700/50 bg-slate-900/60 px-4 py-3 text-sm text-slate-100 placeholder-slate-500 backdrop-blur-sm transition-all focus:border-indigo-500/50 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+            />
+          </div>
+          <button
+            type="submit"
+            class="hero-cta-primary relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-linear-to-r from-indigo-500 to-violet-500 px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 cursor-pointer whitespace-nowrap"
+          >
+            <span class="relative z-10">Early Access anfragen</span>
+            <span class="hero-shimmer" aria-hidden="true"></span>
+          </button>
+        </div>
+        <p class="early-access-success mt-3 hidden text-sm text-green-400">
+          Danke! Wir melden uns bei dir.
+        </p>
+      </form>
 
-        <!-- Secondary: glass effect -->
+      <!-- Social Proof line -->
+      <p class="mt-4 text-sm text-slate-500">
+        Open Beta Q3 2026 · Bereits 12+ Teams im Early Access
+      </p>
+
+      <!-- Secondary CTA -->
+      <div class="mt-4">
         <a
-          href="#architektur"
+          href="#showcase"
           class="hero-cta-secondary inline-flex items-center rounded-lg border border-white/10 px-6 py-3 text-sm font-medium text-slate-300 backdrop-blur transition-all hover:border-white/25 hover:text-slate-100"
           style="background: rgba(255,255,255,0.05);"
         >
-          Architektur ansehen
+          Produkt ansehen
         </a>
       </div>
     </div>
@@ -465,3 +495,38 @@ import Logo from './Logo.astro';
     }
   }
 </style>
+
+<script>
+  const form = document.getElementById('early-access-form') as HTMLFormElement;
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const successMsg = form.querySelector('.early-access-success') as HTMLElement;
+      const originalText = btn.querySelector('span.relative')!.textContent;
+
+      btn.disabled = true;
+      btn.querySelector('span.relative')!.textContent = 'Wird gesendet...';
+
+      try {
+        const data = new FormData(form);
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(data as any).toString(),
+        });
+        form.reset();
+        successMsg.classList.remove('hidden');
+        btn.querySelector('span.relative')!.textContent = 'Gesendet!';
+        setTimeout(() => {
+          successMsg.classList.add('hidden');
+          btn.querySelector('span.relative')!.textContent = originalText;
+          btn.disabled = false;
+        }, 4000);
+      } catch {
+        btn.querySelector('span.relative')!.textContent = originalText;
+        btn.disabled = false;
+      }
+    });
+  }
+</script>
